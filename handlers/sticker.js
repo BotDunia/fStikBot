@@ -111,7 +111,7 @@ module.exports = async (ctx) => {
         ])
       })
     } else {
-      if (ctx.session.userInfo.autoEmoji || stickerFile.emoji || ctx.session.userInfo?.stickerSet?.inline) {
+      if (ctx.session.userInfo.autoEmoji || stickerFile.emoji || ctx.session.userInfo?.stickerSet.inline) {
         const stickerInfo = await addSticker(ctx, stickerFile)
 
         const result = await addStickerText(ctx, stickerInfo)
@@ -119,7 +119,7 @@ module.exports = async (ctx) => {
         messageText = result.messageText
         replyMarkup = result.replyMarkup
 
-        if (stickerSet?.public !== true && !stickerSet?.animated && !stickerSet?.inline) {
+        if (stickerSet?.public !== true && !stickerSet.animated && !stickerSet.inline) {
           const countStickers = await ctx.db.Sticker.count({
             stickerSet,
             deleted: false
