@@ -63,7 +63,7 @@ bot.use(rateLimit({
 bot.catch(handleError)
 
 const limitPublicPack = Composer.optional((ctx) => {
-  return ctx.session?.userInfo?.stickerSet?.passcode === 'public'
+  return ctx.session.userInfo.stickerSet.passcode === 'public'
 }, rateLimit({
   window: 1000 * 60,
   limit: 1,
