@@ -61,7 +61,7 @@ module.exports = async (ctx, inputFile, toStickerSet = false) => {
     }
   }
 
-  const isVideo = (stickerSet?.video || inputFile.is_video || (inputFile.mime_type && inputFile.mime_type.match('video'))) || false
+  const isVideo = (stickerSet.video || inputFile.is_video || (inputFile.mime_type && inputFile.mime_type.match('video'))) || false
 
   if (!ctx.session.userInfo) ctx.session.userInfo = await ctx.db.User.getData(ctx.from)
 
@@ -78,7 +78,7 @@ module.exports = async (ctx, inputFile, toStickerSet = false) => {
   defaultStickerSet.name += nameSuffix
   if (ctx.session.userInfo.premium !== true) defaultStickerSet.title += titleSuffix
 
-  if (stickerFile.is_animated === true || stickerSet?.animated) {
+  if (stickerFile.is_animated === true || stickerSet.animated) {
     if (!animatedStickerSet) {
       animatedStickerSet = await ctx.db.StickerSet.getSet({
         owner: defaultStickerSet.owner,
